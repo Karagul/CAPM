@@ -6,11 +6,12 @@ from mystic.solvers import diffev2
 from mystic.monitors import VerboseMonitor
 from mystic.symbolic import generate_constraint, generate_solvers, solve
 from mystic.symbolic import generate_penalty, generate_conditions
+from gekko import GEKKO
 import pandas_datareader as pdr
 import pandas as pd
 
 #input
-number_of_stocks = 3
+number_of_stocks = 2
 is_short_sell = False
 exp_port_ret = 0
 quandl_key = "KAVVW6RCPX2WWvgJNigd"
@@ -115,10 +116,7 @@ def min_var_port(number_of_stocks, is_short_sell, exp_port_ret, cov_matrix, r_ve
 
     # return of portfolio equals expected return constraint
     def constraint2(w):
-        sum_r = exp_port_ret
-        for i in range(number_of_stocks):
-            sum_r -= w[i] * r_vect[i]
-        return sum_r
+        return np.dot(np.array(w),np.array(r_vect))-exp_port_ret
 
     def cf(len=3):
         return generate_constraint(generate_solvers(solve(equations(number_of_stocks))))
@@ -140,6 +138,7 @@ def min_var_port(number_of_stocks, is_short_sell, exp_port_ret, cov_matrix, r_ve
     return result[0]
 
 '''
+
 # solving NLP for CAPM model under scipy
 def min_var_port(number_of_stocks, is_short_sell, exp_port_ret, cov_matrix, r_vect):
     # objective function
@@ -152,22 +151,16 @@ def min_var_port(number_of_stocks, is_short_sell, exp_port_ret, cov_matrix, r_ve
 
     # sum of w = 1 constraint
     def constraint1(w):
-        sum_w = 1
-        for i in range(number_of_stocks):
-            sum_w -= w[i]
-        return sum_w
+        return sum(w)-1
 
     # return of portfolio equals expected return constraint
     def constraint2(w):
-        sum_r = exp_port_ret
-        for i in range(number_of_stocks):
-            sum_r -= w[i] * r_vect[i]
-        return sum_r
+        return np.dot(np.array(w),np.array(r_vect))-exp_port_ret
 
     def solve():
         # initial guess
         w0 = np.zeros((1,number_of_stocks))
-        #w0.fill(1 / float(number_of_stocks))
+        w0.fill(1 / float(number_of_stocks))
 
         # each weight constraint short selling nope possible:[0,1]; short sell possible:[-99999999999.9,9999999999.9]
         b = [0.0, 1.0]
@@ -187,5 +180,33 @@ def min_var_port(number_of_stocks, is_short_sell, exp_port_ret, cov_matrix, r_ve
         return solution.x
 
     return solve()
+'''
+# solving NLP for CAPM model under gekko
+def min_var_port(number_of_stocks, is_short_sell, exp_port_ret, cov_matrix, r_vect):
+    #Initialize Model
+    m = GEKKO()
 
+    # define parameter
+    eq = m.Param(value=1)
+
+    #initialize variables
+    w = [m.Var(lb=0, ub=1) for i in range(number_of_stocks)]
+
+    #initial values
+    w = [1/float(number_of_stocks) for i in range(number_of_stocks)]
+
+    #Equations
+    m.Equation(sum(w)==eq)
+
+    #Objective
+    m.Obj(sum([w[i] * w[j] * cov_matrix[i][j] for i in range(number_of_stocks) for j in range(number_of_stocks)]))
+
+    #Set global options
+    m.options.IMODE = 3 #steady state optimization
+
+    #Solve simulation
+    m.solve()
+    print(w)
+    return w
+'''
 print(main())
