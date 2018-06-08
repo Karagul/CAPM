@@ -60,7 +60,8 @@ class portfolio:
 
     #return stock price from yahoo
     def checkYahooPrice(self,stock_):
-        link = "http://finance.yahoo.com/q/ks?s=" + stock_ + "+Key+Statistics"
+        link = "https://finance.yahoo.com/quote/" + stock_
+        #link = "http://finance.yahoo.com/q/ks?s=" + stock_ + "+Key+Statistics"
         resp = urllib.request.urlopen(link).read()
         keyword = '<span class="Trsdu(0.3s) Trsdu(0.3s) Fw(b) Fz(36px) Mb(-4px) D(b)" data-reactid="21">'
         idxstart = str(resp).find(keyword)
@@ -69,7 +70,8 @@ class portfolio:
 
     # return bid price from yahoo
     def checkYahooBid(self,stock_):
-        link = "http://finance.yahoo.com/q/ks?s=" + stock_ + "+Key+Statistics"
+        link = "https://finance.yahoo.com/quote/" + stock_
+        #link = "http://finance.yahoo.com/q/ks?s=" + stock_ + "+Key+Statistics"
         resp = urllib.request.urlopen(link).read()
         keyword = '<span class="Trsdu(0.3s) " data-reactid="25">'
         idxstart = str(resp).find(keyword)
@@ -78,7 +80,8 @@ class portfolio:
 
     # return ask price from yahoo
     def checkYahooAsk(self,stock_):
-        link = "http://finance.yahoo.com/q/ks?s=" + stock_ + "+Key+Statistics"
+        link = "https://finance.yahoo.com/quote/" + stock_
+        #link = "http://finance.yahoo.com/q/ks?s=" + stock_ + "+Key+Statistics"
         resp = urllib.request.urlopen(link).read()
         keyword = '<span class="Trsdu(0.3s) " data-reactid="30">'
         idxstart = str(resp).find(keyword)

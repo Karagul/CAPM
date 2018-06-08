@@ -80,11 +80,14 @@ exp_port_ret = 0
 quandl_key = "KAVVW6RCPX2WWvgJNigd"
 start = '2015-01-02'
 end = '2017-12-31'
-investment = 1000000000
+investment = 10000
 
 me = Portfolio.portfolio("me")
 me.topUp(investment)
 capm = CAPM.main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,testhuge,start,end)
+
 for i in range(len(capm[0])):
-    me.buy(capm[0][i],investment * 0.95 * capm[1][i])
+    price = me.checkYahooAsk(capm[0][i])
+    quant = int(investment * capm[1][i] / price)
+    me.buy(capm[0][i],quant)
 print(me.getValue())
