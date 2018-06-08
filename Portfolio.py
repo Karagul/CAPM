@@ -84,4 +84,3 @@ class portfolio:
         idxstart = str(resp).find(keyword)
         idxend = str(resp).find(" ",idxstart+len(keyword))
         return float(str(resp)[idxstart+len(keyword):idxend].replace(',' , ''))
-
