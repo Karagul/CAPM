@@ -85,9 +85,12 @@ investment = 10000
 me = Portfolio.portfolio("me")
 me.topUp(investment)
 capm = CAPM.main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,testhuge,start,end)
-
 for i in range(len(capm[0])):
-    price = me.checkYahooAsk(capm[0][i])
-    quant = int(investment * capm[1][i] / price)
-    me.buy(capm[0][i],quant)
+    try:
+        price = me.checkYahooAsk(capm[0][i])
+        quant = int(investment * capm[1][i] / price)
+        me.buy(capm[0][i],quant)
+    except:
+        print(i)
+print(capm)
 print(me.getValue())
