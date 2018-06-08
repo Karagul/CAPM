@@ -2,20 +2,17 @@ import numpy as np
 from scipy.optimize import minimize
 import quandl
 
-def main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,stockRange):
+def main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,stockRange,start,end):
     list_of_stocks_data = []
     list_of_stocks_name = []
 
     #read adj close data from quandl in time span of 3 years ago to today
     quandl.ApiConfig.api_key = quandl_key
     for i in stockRange:
-        #stock = pdr.get_data_quandl(symbols=i,start='2015-01-01',end= '2017-12-31')
-        #adj_close = stock['AdjClose'].as_matrix()
-        stock = quandl.get("WIKI/" + i + '.11', start_date='2015-01-02', end_date='2017-12-31', returns='numpy')
+        stock = quandl.get("WIKI/" + i + '.11', start_date=start, end_date=end, returns='numpy')
         adj_close = [i[1] for i in stock]
         list_of_stocks_name.append(i)
         list_of_stocks_data.append(adj_close)
-
     #Adjust initalial data to make sure all timeseries contain the same amout of data for covariance calculation
     length = [len(i) for i in list_of_stocks_data]
     min_length = min(length)
