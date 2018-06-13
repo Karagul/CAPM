@@ -31,6 +31,8 @@ def raw_data(list_of_stocks_data, list_of_stocks_name,number_of_stocks,exp_port_
             ij = [list_of_stocks_return[i][k]*list_of_stocks_return[j][k] for k in range(len(list_of_stocks_return[i]))]
             cov_matrix[i][j] = np.mean(ij)-np.mean(list_of_stocks_return[i])*np.mean(list_of_stocks_return[j])
     set_of_stocks = list_of_stocks_name
+
+
     return muti_min_var_port(r_vect,s_vect,cov_matrix,number_of_stocks,exp_port_ret,is_short_sell,set_of_stocks)
 
 def muti_min_var_port(r_vect, s_vect, cov_matrix, number_of_stocks, exp_port_ret, is_short_sell, set_of_stocks):

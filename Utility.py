@@ -74,23 +74,25 @@ testhuge = ['AAPL', 'ABT', 'ABBV', 'ACN', 'ACE', 'ADBE', 'ADT', 'AAP', 'AES', 'A
           'VNO', 'VMC', 'WMT', 'WBA', 'DIS', 'WM', 'WAT', 'ANTM', 'WFC', 'WDC', 'WU', 'WY', 'WHR', 'WFM', 'WMB', 'WEC',
           'WYN', 'WYNN', 'XEL', 'XRX', 'XLNX', 'XL', 'XYL', 'YHOO', 'YUM', 'ZBH', 'ZION', 'ZTS']
 
-number_of_stocks = 50
+number_of_stocks = 2
 is_short_sell = False
 exp_port_ret = 0
 quandl_key = "KAVVW6RCPX2WWvgJNigd"
-start = '2015-01-02'
+start = '2017-12-22'
 end = '2017-12-31'
 investment = 10000
 
 me = Portfolio.portfolio("me")
+me.read()
 me.topUp(investment)
-capm = CAPM.main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,testhuge,start,end)
+capm = CAPM.main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,testtiny,start,end)
 for i in range(len(capm[0])):
     try:
         price = me.checkYahooAsk(capm[0][i])
         quant = int(investment * capm[1][i] / price)
         me.buy(capm[0][i],quant)
     except:
-        print(i)
+        print("Can't reach data for: " + capm[0][i])
+me.write()
 print(capm)
 print(me.getValue())
