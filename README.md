@@ -6,3 +6,5 @@ CAPM.py -> solver under CAPM
 Portfolio.py -> realtime data and custom portfolio for paper trading
 
 Utility -> Use Portfolio.py to test CAPM.py by paper trading
+
+log.txt -> save all portfolio() created 
