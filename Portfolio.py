@@ -12,8 +12,10 @@ class portfolio:
 
     #buy stocks
     def buy(self,stock_,amount_):
+        amount_ = int(amount_)
         if stock_ in self.stock:
             idx = self.stock.index(stock_)
+            self.amount[idx] += amount_
         else:
             self.stock.append(stock_)
             self.amount.append(amount_)
@@ -23,6 +25,7 @@ class portfolio:
 
     #sell stocks
     def sell(self,stock_,amount_):
+        amount_ = int(amount_)
         if stock_ in self.stock:
             idx = self.stock.index(stock_)
             self.amount[idx] -= amount_
@@ -34,26 +37,30 @@ class portfolio:
 
     #top up the money in the account
     def topUp(self,amount_):
-        self.account += amount_
+        self.account += float(amount_)
 
     #withdraw money from the account
     def withdraw(self,amount_):
-        self.account -= amount_
+        self.account -= float(amount_)
+
+    #getter for value
+    def getName(self):
+        return self.name
 
     #getter for value
     def getValue(self):
         self.value = 0
         for i in range(len(self.stock)):
             self.value += self.checkYahooPrice(self.stock[i]) * self.amount[i]
-        return self.value
+        return round(self.value,2)
 
     #getter for account
     def getAccount(self):
-        return self.account
+        return round(self.account,2)
 
     #getter for [(stock,amount)]
     def getPortfolio(self):
-        return [(self.stock[i],self.amount[i]) for i in range(len(self.stock))]
+        return [(self.stock[i],int(self.amount[i])) for i in range(len(self.stock))]
 
     #Change whole portfolio
     def change(self,name_,stock_,amount_,value_,account_):
@@ -106,10 +113,13 @@ class portfolio:
                     exist = True
                     self.stock = []
                     self.amount = []
-                    self.account = float(account_[0:len(account_)-2])
+                    if '/n' in account_:
+                        self.account = float(account_[0:len(account_)-2])
+                    else:
+                        self.account = float(account_)
                     i = 0
                     while i < len(stock_):
-                        if stock_[i] == "," and i + 1 < len(stock_) and stock_[i + 1] != "\n":
+                        if stock_[i] == "," and i + 1 < len(stock_) and stock_[i + 1] != "\n" and stock_[i + 1] != ",":
                             j = i + 1
                             while stock_[j] != ",":
                                 j += 1
@@ -131,7 +141,7 @@ class portfolio:
                         else:
                             i += 1
         if not exist:
-            print("Error, can't read " + self.name + ".")
+            print("Can't find user in the database: " + self.name + ".")
         log.close()
 
     #write to log

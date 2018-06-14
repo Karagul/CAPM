@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<script src="static/js/jquery-3.3.1.js"> </script>
+<script src="static/js/name.js"> </script>
+<script src="static/js/topup.js"> </script>
+<script src="static/js/withdraw.js"> </script>
+<script src="static/js/buy.js"> </script>
+<script src="static/js/sell.js"> </script>
+<script src="static/js/get.js"> </script>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="text-muted">Paper Trading</h1>
+        </div>
+
+        <div class="main">
+            <div class="col-lg-6">
+                <h2>Name</h2>
+                <form action="/name" method = post>
+                    <p>Your username is: <span style="background-color: rgba(236, 245, 255,0.8);border: 3px solid #667292;border-radius: 10px;padding:10px">{{user}}</span>
+                        &nbsp <input type="text" name="name" id="name" required="required"> &nbsp&nbsp&nbsp <button name = name>Update</button><br></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="account">
+            <div class="col-lg-6">
+                <h2>Manage Account</h2>
+                <form action="/topup" method = post>
+                    <p>Top up your account by($): &nbsp<input type="number" name="topup"  min="0" required="required"> &nbsp&nbsp&nbsp <button name = topup>Top Up</button> </p>
+                </form>
+                <form action="/withdraw" method = post>
+                    <p>Withdraw from your account by($): &nbsp<input type="number" name="withdraw" min="0" required="required"> &nbsp&nbsp&nbsp <button name = withdraw>Withdraw</button> </p>
+                </form>
+            </div>
+        </div>
+
+        <div class="Buy">
+            <div class="col-lg-6">
+                <form action="/buy" method = post>
+                <h2>Buy</h2>
+                <p>Stock : &nbsp<input type="text" name="buystock" id="buystock" placeholder="(Apple as AAPL)" required="required"></p>
+                <p>Amount: &nbsp<input type="number" name="buyamount" id="buyamount" placeholder="Postive integer" min="0" required="required"></p>
+                <p><button name = buy>Buy</button></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="Sell">
+            <div class="col-lg-6">
+                <form action="/sell" method = post>
+                <h2>Sell</h2>
+                <p>Stock : &nbsp<input type="text" name="sellstock" id="sellstock" placeholder="(Apple as AAPL)" required="required"></p>
+                <p>Amount: &nbsp<input type="number" name="sellamount" id="sellamount" placeholder="Postive integer" min="0" required="required"></p>
+                <p><button name = sell>Sell</button></p>
+                </form>
+            </div>
+        </div>
+
+        <div class="Get">
+            <div class="col-lg-6">
+                <form action="/get" method = get>
+                <h2>Account Details &nbsp&nbsp&nbsp<button name = get>Update</button></h2>
+                    <p>Name: &nbsp  <span style="background-color: rgba(236, 245, 255,0.8);border: 3px solid #667292;border-radius: 10px;padding:5px">{{name}}</span></p>
+                    <p>Account($): &nbsp  <span style="background-color: rgba(236, 245, 255,0.8);border: 3px solid #667292;border-radius: 10px;padding:5px">{{account}}</span></p>
+                    <p>Stocks value($): <span style="background-color: rgba(236, 245, 255,0.8);border: 3px solid #667292;border-radius: 10px;padding:5px"> &nbsp {{value}}</span></p>
+                <p>Stocks, Amount:
+                    {% for stock, amount in result %}
+                    <ul style="color: rgba(55, 76, 142,1);font-family: verdana;font-size: 100%;">
+                      <li>{{stock}}, {{amount}}</li>
+                    </ul>
+                    {% endfor %}
+                </p>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<footer>
+    <h3>Background: https://www.pixiv.net/member_illust.php?mode=medium&illust_id=63044865</h3>
+</footer>
+</html>
