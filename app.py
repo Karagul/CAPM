@@ -28,7 +28,7 @@ def topup():
     port.read()
     port.topUp(amount)
     port.write()
-    return render_template("get.html")
+    return render_template("get.html",user=port.getName())
 
 @app.route("/withdraw",methods=['POST'])
 def withdraw():
@@ -40,7 +40,7 @@ def withdraw():
     port.read()
     port.withdraw(amount)
     port.write()
-    return render_template("get.html")
+    return render_template("get.html",user=port.getName())
 
 @app.route("/buy",methods=['POST'])
 def buy():
@@ -53,7 +53,7 @@ def buy():
     port.read()
     port.buy(stock,amount)
     port.write()
-    return render_template("get.html")
+    return render_template("get.html",user=port.getName())
 
 @app.route("/sell",methods=['POST'])
 def sell():
@@ -66,7 +66,7 @@ def sell():
     port.read()
     port.sell(stock,amount)
     port.write()
-    return render_template("get.html")
+    return render_template("get.html",user=port.getName())
 
 @app.route("/get",methods=['GET'])
 def get():
