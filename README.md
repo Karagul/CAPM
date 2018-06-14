@@ -7,13 +7,13 @@ Import(CAPM Optimization): numpy, scipy, quandl, html.parser, urllib.request
 
 Import(Paper Trade App): numpy, flask, html.parser, urllib.request
 
-Local Address in browser: http://127.0.0.1:5000/
-
 - CAPM.py -> Portfolio selector under CAPM
 
 - Portfolio.py -> realtime data and custom portfolio for paper trading
 
-- Utility -> Use Portfolio.py to test CAPM.py by paper trading
+- Utility.py -> Use Portfolio.py to test CAPM.py by paper trading
+
+- app.py -> flask build for the app
 
 - log.txt -> save all portfolio() created 
 
@@ -22,3 +22,9 @@ Local Address in browser: http://127.0.0.1:5000/
 - /templates -> all html interface
 
 - /static -> .js .css and all document that supports html
+
+To Run:
+
+- console: python app.py
+
+- Local Address in browser: http://127.0.0.1:5000/
