@@ -7,18 +7,16 @@ Import(CAPM Optimization): numpy, scipy, quandl, html.parser, urllib.request
 
 Import(Paper Trade App): numpy, flask, html.parser, urllib.request
 
--
+- CAPM.py -> Portfolio selector under CAPM
 
-CAPM.py -> Portfolio selector under CAPM
+- Portfolio.py -> realtime data and custom portfolio for paper trading
 
-Portfolio.py -> realtime data and custom portfolio for paper trading
+- Utility -> Use Portfolio.py to test CAPM.py by paper trading
 
-Utility -> Use Portfolio.py to test CAPM.py by paper trading
+- log.txt -> save all portfolio() created 
 
-log.txt -> save all portfolio() created 
+- curr.txt -> save current user in the app
 
-curr.txt -> save current user in the app
+- /templates -> all html interface
 
-/templates -> all html interface
-
-/static -> .js .css and all document that supports html
+- /static -> .js .css and all document that supports html
