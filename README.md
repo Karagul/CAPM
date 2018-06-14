@@ -7,9 +7,9 @@ Import(CAPM Optimization): numpy, scipy, quandl, html.parser, urllib.request
 
 Import(Paper Trade App): numpy, flask, html.parser, urllib.request
 
-Portfolio selector under CAPM
 
-CAPM.py -> solver under CAPM
+
+CAPM.py -> Portfolio selector under CAPM
 
 Portfolio.py -> realtime data and custom portfolio for paper trading
 
