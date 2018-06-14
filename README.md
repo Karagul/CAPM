@@ -7,7 +7,7 @@ Import(CAPM Optimization): numpy, scipy, quandl, html.parser, urllib.request
 
 Import(Paper Trade App): numpy, flask, html.parser, urllib.request
 
-
+-
 
 CAPM.py -> Portfolio selector under CAPM
 
