@@ -9,10 +9,13 @@ def main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,stockRange,start
     #read adj close data from quandl in time span of 3 years ago to today
     quandl.ApiConfig.api_key = quandl_key
     for i in stockRange:
-        stock = quandl.get("WIKI/" + i + '.11', start_date=start, end_date=end, returns='numpy')
-        adj_close = [i[1] for i in stock]
-        list_of_stocks_name.append(i)
-        list_of_stocks_data.append(adj_close)
+        try:
+            stock = quandl.get("WIKI/" + i + '.11', start_date=start, end_date=end, returns='numpy')
+            adj_close = [i[1] for i in stock]
+            list_of_stocks_name.append(i)
+            list_of_stocks_data.append(adj_close)
+        except:
+            print("Not Found:" + i)
     #Adjust initalial data to make sure all timeseries contain the same amout of data for covariance calculation
     length = [len(i) for i in list_of_stocks_data]
     min_length = min(length)
@@ -23,8 +26,15 @@ def main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,stockRange,start
 def raw_data(list_of_stocks_data, list_of_stocks_name,number_of_stocks,exp_port_ret,is_short_sell):
     #process data by calculate simple return's mean, standard deviation and covariance matrix
     list_of_stocks_return = [[(j[i+1]-j[i])/j[i] for i in range(1,len(j)-1)] for j in list_of_stocks_data]
-    r_vect = [np.mean(i) for i in list_of_stocks_return]
-    s_vect = [np.std(i) for i in list_of_stocks_return]
+    r_vect = []
+    s_vect = []
+    for i in list_of_stocks_return:
+        if not len(i) == 0:
+            r_vect.append(np.mean(i))
+            s_vect.append(np.std(i))
+        else:
+            r_vect.append(0)
+            s_vect.append(9999999999)
     cov_matrix = np.zeros((len(r_vect),len(r_vect)))
     for i in range(len(r_vect)):
         for j in range(len(r_vect)):
@@ -47,7 +57,7 @@ def muti_min_var_port(r_vect, s_vect, cov_matrix, number_of_stocks, exp_port_ret
             sols.append(sol)
             rets.append(ret)
             stocks.append(subset_of_stocks)
-        return (stocks[np.argmax(rets)], sols[np.argmax(rets)])
+        return (stocks[np.argmax(rets)], sols[np.argmax(rets)],np.max(rets))
 
     # heuristic of selecting high return-low risk asset by weight
     def find_port(weight_risk, r_vect, s_vect, number_of_stocks, cov_matrix, exp_port_ret, is_short_sell,

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/capmout.css">
+</head>
+
+<body>
+    <div class="container">
+            <div class="header">
+                <h1 class="text-muted">Capital Asset Pricing Model Portfolio Selector</h1>
+            </div>
+
+            <div class="output">
+                <h2>CAPM Selector Output</h2>
+                <p>Expected daily rate of return: &nbsp {{ret}} &nbsp %</p>
+                <p>Stocks, Shares:
+                    {% for stock, amount in result %}
+                    <ul style="color:#ad3300;font-family: verdana;font-size: 100%;;">
+                      <li>{{stock}}, {{amount}}</li>
+                    </ul>
+                    {% endfor %}
+                </p>
+                <p><button name = redo>Redo</button> </p>
+                <a href="/index.html">Visit our paper trade system</a> &nbsp&nbsp&nbsp <a href="/binomial.html">Visit our binomial option price estimator</a> &nbsp&nbsp&nbsp <a href="/main.html">Title page</a>
+            </div>
+    </div>
+</body>
+
+<footer>
+    <h3>Powered by: Yahoo Finance, quandl</h3>
+    <h3>Background: https://www.pixiv.net/member_illust.php?mode=medium&illust_id=68712029</h3>
+</footer>
+
+</html>

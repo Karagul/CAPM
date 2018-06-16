@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/capmin.css">
+</head>
+<script src="static/js/generate.js"> </script>
+<body>
+    <div class="container">
+            <div class="header">
+                <h1 class="text-muted">Capital Asset Pricing Model Portfolio Selector</h1>
+            </div>
+
+            <div class="input">
+                <h2>CAPM Selector Input</h2>
+                <form action="/generate" method = post>
+                    <p>Investment amount($): &nbsp<input type="text" name="amount" id="amount" required="required"></p>
+                    <p>Number of stocks: &nbsp<input type="number" name="number" id="number" placeholder="Postive Integer" required="required"></p>
+                    <p>Is short-selling allowed: &nbsp No &nbsp
+                    <label class="switch">
+                        <input type="checkbox" name="short" value="short" >
+                        <span class="slider round"></span>
+                    </label>
+                        &nbsp Yes
+                    </p>
+                    <p>Expected portfolio return(%):  &nbsp<input type="number" name="ret" id="ret" required="required" value="0" placeholder="0"> &nbsp <sub>(leave it 0 if no restriction)</sub></p>
+                    <p>Data collection start date: &nbsp<input type="date" name="start" id="start" required="required" value="2015-01-01" placeholder="2015-01-01"></p>
+                    <p>Data collection end date: &nbsp<input type="date" name="end" id="end"  required="required" value="2017-12-31" placeholder="2017-12-31"> </p>
+                    <p>Stock range: &nbsp
+                    <label class="range">
+                        <select name="range" id="range">
+                          <option value="dow30">Dow30</option>
+                          <!--<option value="nasdaq100">NASDAQ100</option>-->
+                          <!--<option value="iq100">IQ100</option>-->
+                          <option value="snp500">SNP500</option>
+                          <option value="others">Others(Please Specify Below)</option>
+                        </select>
+                    </label>
+                    </p>
+                    <textarea placeholder="AAPL,AMZN" name="stock" id="stock" rows="5" cols="150"></textarea>
+                    <p><button name = generate>Generate</button> </p>
+                </form>
+                <a href="/index.html">Visit our paper trade system</a> &nbsp&nbsp&nbsp <a href="/binomial.html">Visit our binomial option price estimator</a> &nbsp&nbsp&nbsp <a href="/main.html">Title page</a>
+            </div>
+    </div>
+</body>
+
+<footer>
+    <h3>Powered by: Yahoo Finance, quandl</h3>
+    <h3>Background: https://www.pixiv.net/member_illust.php?mode=medium&illust_id=57292983</h3>
+</footer>
+
+</html>

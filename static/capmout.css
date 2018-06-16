@@ -1,0 +1,82 @@
+button {
+    background-color: #751100;
+    border: none;
+    color: white;
+    padding: 7px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: verdana;
+}
+button:hover {
+    background-color: #fca176;;
+}
+body {
+    background-image: url("capmout.png");
+    background-repeat: repeat;
+    background-size: cover;
+    background-color: #cccccc;
+    background-position: center top;
+}
+h1   {
+    color: #c83349;
+    font-family: verdana;
+    font-size: 200%;
+    text-align: center;
+    border: 3px solid #667292;
+    padding: 30px;
+    magrin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 300px;
+    margin-right:300px;
+    border-radius: 10px;
+    background-color:rgba(255, 207, 196,0.8);
+}
+h2   {
+    color: #e06377;
+    font-family: verdana;
+    font-size: 175%;
+}
+p    {
+    color: #ad3300;
+    font-family: verdana;
+    font-size: 110%;
+    font-weight: bold;
+}
+a    {
+    color: #ad3300;
+    font-family: Comic Sans MS;
+    font-size: 110%;
+    font-weight: bold;
+}
+a:visited{
+    color: #e0876a;
+    font-family: Comic Sans MS;
+    font-size: 110%;
+    font-weight: bold;
+}
+a:hover {
+    color: #fca176;
+}
+.output {
+    text-align: left;
+    border: 3px solid #667292;
+    padding-top: 10px;
+    padding-left: 100px;
+    padding-bottom: 20px;
+    magrin-top: 30px;
+    margin-bottom: 30px;
+    margin-left: 300px;
+    margin-right:300px;
+    border-radius: 10px;
+    background-color:rgba(255, 228, 196,0.85);
+}
+
+h3{
+    color: rgba(255, 255, 255, 0.8);
+    font-family: verdana;
+    font-size: 75%;
+    margin-left: 300px;
+}

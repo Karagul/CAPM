@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/binomial.css">
+</head>
+<script src="static/js/estimate.js"> </script>
+<body>
+    <div class="container">
+            <div class="header">
+                <h1 class="text-muted">Binomial Options Model Price Estimator</h1>
+            </div>
+
+            <div class="input">
+                <h2>Binomial Input</h2>
+                <form action="/estimate" method = post>
+                    <p>Option Type: &nbsp Vanilla Puts &nbsp
+                    <label class="switch">
+                        <input type="checkbox" name="option" value="option" >
+                        <span class="slider round"></span>
+                    </label>
+                        &nbsp Vanilla Calls
+                    </p>
+                    <p>Strike price (K): &nbsp<input type="number" step="any" name="k" id="k" required="required" placeholder="100"> $</p>
+                    <p>Time until maturity (T): &nbsp<input type="number" step="any" name="t" id="t" required="required" placeholder="0.5"> Years</p>
+                    <p>Initial asset price (S<sub>0</sub>):  &nbsp<input type="number" step="any" name="s0" id="s0" required="required" placeholder="100"> $ </p>
+                    <p>Volatility (&sigma;): &nbsp<input type="number" name="sigma" step="any" id="sigma" required="required" value="0.5" placeholder="0.5"></p>
+                    <p>Risk free interest rate (r): &nbsp<input type="number" step="any" name="r" id="r"  required="required" value="0.5" placeholder="0.5"> </p>
+                    <p>Continuous dividend yield (q): &nbsp<input type="number" step="any" name="q" id="q"  required="required" value="0" placeholder="0"> <sub>(non dividend paying: q = 0)</sub></p>
+                    <p>Steps (N): &nbsp<input type="number" name="n" id="n"  required="required" value="1000" placeholder="1000"> <sub>(default = 1000)</sub></p>
+                    <p>Exercise Style: &nbsp European &nbsp
+                    <label class="switch">
+                        <input type="checkbox" name="exercise" value="exercise" >
+                        <span class="slider round"></span>
+                    </label>
+                        &nbsp American
+                    </p>
+                    <p><button name = estimate>Estimate</button> </p>
+                </form>
+                <a href="/index.html">Visit our paper trade system</a> &nbsp&nbsp&nbsp <a href="/capmin.html">Visit our CAPM portfolio selctor</a> &nbsp&nbsp&nbsp <a href="/main.html">Title page</a>
+            </div>
+    </div>
+</body>
+
+<footer>
+    <h3>Background: https://www.pixiv.net/member_illust.php?mode=medium&illust_id=66092976</h3>
+</footer>
+
+</html>

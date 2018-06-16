@@ -1,5 +1,6 @@
 import urllib.request
 from html.parser import HTMLParser
+import numpy as np
 
 #Portfolio Class Take Data From Yahoo
 class portfolio:
@@ -61,6 +62,10 @@ class portfolio:
     #getter for [(stock,amount)]
     def getPortfolio(self):
         return [(self.stock[i],int(self.amount[i])) for i in range(len(self.stock))]
+
+    #get diversity of portfolio
+    def getDiversity(self):
+        return max(0,min(np.log(len(self.stock))/np.log(20),1))
 
     #Change whole portfolio
     def change(self,name_,stock_,amount_,value_,account_):

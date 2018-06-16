@@ -20,8 +20,8 @@
             <div class="col-lg-6">
                 <h2>Name</h2>
                 <form action="/name" method = post>
-                    <p>Your username is: <span style="background-color: rgba(236, 245, 255,0.8);border: 3px solid #667292;border-radius: 10px;padding:10px">{{user}}</span>
-                        &nbsp <input type="text" name="name" id="name" required="required"> &nbsp&nbsp&nbsp <button name = name>Update</button><br></p>
+                    <p>Current user: <span style="background-color: rgba(236, 245, 255,0.8);border: 3px solid #667292;border-radius: 10px;padding:10px">{{user}}</span>
+                        &nbsp <input type="text" name="name" id="name" required="required"> &nbsp&nbsp&nbsp <button name = name>Sign in</button><br></p>
                 </form>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <form action="/buy" method = post>
                 <h2>Buy</h2>
                 <p>Stock : &nbsp<input type="text" name="buystock" id="buystock" placeholder="(Apple as AAPL)" required="required"></p>
-                <p>Amount: &nbsp<input type="number" name="buyamount" id="buyamount" placeholder="Postive integer" min="0" required="required"></p>
+                <p>Shares: &nbsp<input type="number" name="buyamount" id="buyamount" placeholder="Postive integer" min="0" required="required"></p>
                 <p><button name = buy>Buy</button></p>
                 </form>
             </div>
@@ -54,7 +54,7 @@
                 <form action="/sell" method = post>
                 <h2>Sell</h2>
                 <p>Stock : &nbsp<input type="text" name="sellstock" id="sellstock" placeholder="(Apple as AAPL)" required="required"></p>
-                <p>Amount: &nbsp<input type="number" name="sellamount" id="sellamount" placeholder="Postive integer" min="0" required="required"></p>
+                <p>Shares: &nbsp<input type="number" name="sellamount" id="sellamount" placeholder="Postive integer" min="0" required="required"></p>
                 <p><button name = sell>Sell</button></p>
                 </form>
             </div>
@@ -64,10 +64,10 @@
             <div class="col-lg-6">
                 <form action="/get" method = get>
                 <h2>Account Details &nbsp&nbsp&nbsp<button name = get>Update</button></h2>
-                    <p>Name: &nbsp  {{name}}</p>
+                    <p>Username: &nbsp  {{name}}</p>
                     <p>Account($): &nbsp  {{account}}</p>
-                    <p>Stocks value($): &nbsp {{value}}</p>
-                <p>Stocks, Amount:
+                    <p>Equity value($): &nbsp {{value}}</p>
+                <p>Stocks, Shares:
                     {% for stock, amount in result %}
                     <ul style="color: rgba(55, 76, 142,1);font-family: verdana;font-size: 100%;">
                       <li>{{stock}}, {{amount}}</li>
@@ -75,13 +75,14 @@
                     {% endfor %}
                 </p>
                 </form>
+                <a href="/capmin.html">Visit our CAPM portfolio selctor</a> &nbsp&nbsp&nbsp <a href="/binomial.html">Visit our binomial option price estimator</a> &nbsp&nbsp&nbsp <a href="/main.html">Title page</a>
             </div>
         </div>
-
     </div>
 </body>
 
 <footer>
+    <h3>Powered by: Yahoo Finance</h3>
     <h3>Background: https://www.pixiv.net/member_illust.php?mode=medium&illust_id=63044865</h3>
 </footer>
 </html>
