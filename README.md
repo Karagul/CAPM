@@ -1,5 +1,5 @@
 # CAPM
-Required: Python 3, HTML 5
+Based on: Python 3, HTML 5, SQLite
 
 Realtime Data from: Yahoo, Optimization Data from quandl
 
