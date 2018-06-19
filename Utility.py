@@ -66,10 +66,10 @@ exp_port_ret = 0
 quandl_key = "KAVVW6RCPX2WWvgJNigd"
 start = '2017-12-22'
 end = '2017-12-31'
-investment = 10000
+investment = 1000000
 
-me = Portfolio.portfolio("me")
-me.read()
+me = Portfolio.portfolio("you")
+me.readSQL()
 me.topUp(investment)
 capm = CAPM.main(number_of_stocks,is_short_sell,exp_port_ret,quandl_key,dow30,start,end)
 for i in range(len(capm[0])):
@@ -79,6 +79,6 @@ for i in range(len(capm[0])):
         me.buy(capm[0][i],quant)
     except:
         print("Can't reach data for: " + capm[0][i])
-me.write()
-print(capm)
-print(me.getValue())
+me.writeSQL()
+
+

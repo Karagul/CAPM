@@ -97,6 +97,7 @@ p    {
     margin-right:1000px;
     border-radius: 20px;
     transform: rotate(-1.5deg);
+    height:300px;
 }
 html {
   -webkit-box-sizing: border-box;

@@ -1,6 +1,7 @@
 import urllib.request
 from html.parser import HTMLParser
 import numpy as np
+import sqlite3
 
 #Portfolio Class Take Data From Yahoo
 class portfolio:
@@ -177,7 +178,67 @@ class portfolio:
         log.write(account_ + '\n')
         log.close()
 
+    # write to log
+    def writeSQL(self):
+        connection = sqlite3.connect("log.db")
+        crsr = connection.cursor()
 
+        sql_command = """CREATE TABLE IF NOT EXISTS USER(
+                   ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                   NAME TEXT,
+                   STOCK TEXT,
+                   AMOUNT TEXT,
+                   ACCOUNT REAL
+                );"""
+        crsr.execute(sql_command)
+
+        stocks = list(map(str, self.stock))
+        amounts = list(map(str, self.amount))
+        try:
+            crsr.execute("SELECT STOCK FROM USER WHERE USER.NAME = ?", (str(self.name),))
+            list(map(str, crsr.fetchone()[0].split(",")))
+            name = str(self.name)
+            crsr.execute("UPDATE USER SET STOCK = ? WHERE NAME = ?",(','.join(stocks),name))
+            crsr.execute("UPDATE USER SET AMOUNT = ? WHERE NAME = ?", (','.join(amounts), name))
+            crsr.execute("UPDATE USER SET ACCOUNT = ? WHERE NAME = ?", (self.account, name))
+        except:
+            crsr.execute("INSERT INTO USER (NAME,STOCK,AMOUNT,ACCOUNT) VALUES (?,?,?,?)",(str(self.name),','.join(stocks),','.join(amounts),self.account))
+
+        connection.commit()
+        connection.close()
+
+    # read from log
+    def readSQL(self):
+        connection = sqlite3.connect("log.db")
+        crsr = connection.cursor()
+
+        sql_command = """CREATE TABLE IF NOT EXISTS USER(
+                   ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                   NAME TEXT,
+                   STOCK TEXT,
+                   AMOUNT TEXT,
+                   ACCOUNT REAL
+                );"""
+        crsr.execute(sql_command)
+
+        try:
+            name = (str(self.name),)
+            crsr.execute("SELECT STOCK FROM USER WHERE USER.NAME = ?", name)
+            stocks = list(map(str, crsr.fetchone()[0].split(",")))
+            self.stock = [i for i in stocks if i != ""]
+            crsr.execute("SELECT AMOUNT FROM USER WHERE USER.NAME = ?", name)
+            amounts = crsr.fetchone()[0].split(",")
+            amounts = [i for i in amounts if i != ""]
+            amounts = list(map(int, amounts))
+            self.amount = amounts
+            crsr.execute("SELECT ACCOUNT FROM USER WHERE USER.NAME = ?", name)
+            account = crsr.fetchone()[0]
+            self.account = float(account)
+        except:
+            print("Can't find user in the database: " + self.name + ".")
+
+        connection.commit()
+        connection.close()
 
 # create a subclass and override the handler methods
 class MyHTMLParser(HTMLParser):
@@ -199,4 +260,3 @@ class MyHTMLParser(HTMLParser):
             self.links.append(ret)
         except:
             return
-
