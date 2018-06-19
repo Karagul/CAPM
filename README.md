@@ -15,6 +15,8 @@ Import: numpy, scipy, quandl, html.parser, urllib.request, flask,
 
 - log.txt -> save all portfolio() created 
 
+- log.db -> save all portfolio() created if SQL methods are used
+
 - curr.txt -> save current user in the app
 
 - /templates -> all html interface
