@@ -3,7 +3,7 @@ Required: Python 3, HTML 5
 
 Realtime Data from: Yahoo, Optimization Data from quandl
 
-Import: numpy, scipy, quandl, html.parser, urllib.request, flask,
+Import: numpy, scipy, quandl, html.parser, urllib.request, flask, sqlite3
 
 - CAPM.py -> Portfolio selector under CAPM
 
@@ -24,6 +24,8 @@ Import: numpy, scipy, quandl, html.parser, urllib.request, flask,
 - /static -> .js .css and all document that supports html
 
 To Run:
+
+- install all lib
 
 - console: python app.py
 
